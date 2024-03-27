@@ -12,7 +12,7 @@ import {
 
 const NAV_MENU = [
   {
-    name: "Page",
+    name: "Products",
     icon: RectangleStackIcon,
     href: "/dashboard",
   },
