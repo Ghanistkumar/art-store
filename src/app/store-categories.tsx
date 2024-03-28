@@ -1,40 +1,8 @@
 import React from "react";
 import Image from "next/image";
 import { Typography } from "@mui/material";
-import {
-  GlobeEuropeAfricaIcon,
-  MicrophoneIcon,
-  PuzzlePieceIcon,
-  HeartIcon,
-} from "@heroicons/react/24/solid";
 import CategoryCard from "@/components/category-card";
-
-const CATEGORIES = [
-  {
-    img: "/image/blogs/blog-3.png",
-    icon: HeartIcon,
-    title: "Art 1",
-    desc: "Art 1 Description",
-  },
-  {
-    img: "/image/blogs/blog-12.jpeg",
-    icon: PuzzlePieceIcon,
-    title: "Art 2",
-    desc: "Art 2 Description",
-  },
-  {
-    img: "/image/blogs/blog-10.jpeg",
-    icon: GlobeEuropeAfricaIcon,
-    title: "Art 3",
-    desc: "Art 3 Description",
-  },
-  {
-    img: "/image/blogs/blog-13.png",
-    icon: MicrophoneIcon,
-    title: "Art 4",
-    desc: "Art 4 Description",
-  },
-];
+const  {CATEGORIES} = require("../app/lib/placeholder-data.js")
 
 function StoreCategories() {
   return (
@@ -64,13 +32,13 @@ function StoreCategories() {
         </div>
         </div>
         <div className="col-span-1 flex flex-col gap-6">
-          {CATEGORIES.slice(0, 2).map((props, key) => (
-            <CategoryCard key={key} {...props} />
+          {CATEGORIES.slice(0, 2).map((category: { img: string; title: string; desc: string; icon: React.ElementType<any, keyof React.JSX.IntrinsicElements>; }, key: React.Key | null | undefined) => (
+            <CategoryCard key={key} category={category} />
           ))}
         </div>
         <div className="col-span-1 flex flex-col gap-6">
-          {CATEGORIES.slice(2, 4).map((props, key) => (
-            <CategoryCard key={key} {...props} />
+          {CATEGORIES.slice(2, 4).map((category: { img: string; title: string; desc: string; icon: React.ElementType<any, keyof React.JSX.IntrinsicElements>; }, key: React.Key | null | undefined) => (
+            <CategoryCard key={key} category={category} />
           ))}
         </div>
       </div>
