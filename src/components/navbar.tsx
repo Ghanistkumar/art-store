@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { Typography, Button, Collapse, IconButton } from "@mui/material";
+import { useRouter } from "next/navigation";
+
 import {
   RectangleStackIcon,
   UserCircleIcon,
@@ -30,6 +32,7 @@ const NAV_MENU = [
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const router = useRouter();
 
   return (
     <div className="px-10 sticky top-4 z-50">

@@ -2,14 +2,16 @@
 import Image from "next/image";
 const { PRODUCTS } = require("../../../lib/placeholder-data.js");
 import { notFound } from "next/navigation";
-import { Suspense } from "react";
+import { MouseEventHandler, Suspense } from "react";
 import { ViewProductSkeleton } from "@/app/ui/skeletons";
 import { useState } from "react";
 import CheckoutWizard from "@/components/checkout-wizard";
+import useCart from "@/app/utils/cart-store";
 
 export default function Page({ params }: { params: { id: string } }) {
   const productId = params.id;
   const [open, setOpen] = useState<boolean>(false);
+  const cart = useCart();
   const product = PRODUCTS.find(
     (p: { id: number | undefined }) => p.id === parseInt(productId)
   );
@@ -18,8 +20,12 @@ export default function Page({ params }: { params: { id: string } }) {
     notFound();
   }
 
-  const handleAddtoCart = () => {
+  const handleAddtoCart: MouseEventHandler<HTMLButtonElement> = (e) => {
+    
+    e.preventDefault();
+    cart.addItem(product)
     setOpen(true);
+    console.log(cart.items.length)
   };
   return (
     <>

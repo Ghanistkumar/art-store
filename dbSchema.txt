@@ -52,3 +52,5 @@ CREATE TABLE OrderDetails (
     FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),
     FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
 );
+
+https://www.youtube.com/watch?v=5miHyP6lExg
