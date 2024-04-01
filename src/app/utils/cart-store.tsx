@@ -7,7 +7,7 @@ interface Product {
   img: string;
   tag: string;
   title: string;
-  label: string;
+  price: number;
   desc: string;
 }
 

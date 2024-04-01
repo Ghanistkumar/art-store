@@ -16,7 +16,7 @@ const NAV_MENU = [
   {
     name: "Products",
     icon: RectangleStackIcon,
-    href: "/dashboard",
+    href: "/",
   },
   {
     name: "Account",

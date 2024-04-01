@@ -25,7 +25,6 @@ export default function Page({ params }: { params: { id: string } }) {
     e.preventDefault();
     cart.addItem(product)
     setOpen(true);
-    console.log(cart.items.length)
   };
   return (
     <>
@@ -51,7 +50,7 @@ export default function Page({ params }: { params: { id: string } }) {
                 <div className="flex items-center mb-4">
                   <span className="text-lg font-semibold mr-2">Price:</span>
                   <span className="text-xl font-bold text-blue-600">
-                    {product.label}
+                  &#8377; {product.price}
                   </span>
                 </div>
                 <div className="flex items-center mb-4">

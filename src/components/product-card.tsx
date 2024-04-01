@@ -9,7 +9,7 @@ interface ProductCardProps {
     tag: string;
     title: string;
     desc: string;
-    label: string;
+    price: number;
   };
 }
 
@@ -38,7 +38,7 @@ export function ProductCard({ product }: ProductCardProps) {
             className="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg border border-gray-900 text-gray-900 hover:opacity-75 focus:ring focus:ring-gray-300 active:opacity-[0.85]"
             onClick={() => router.push(`/product/${product.id}/view`)}
           >
-            Just @ {product.label}
+            Just @ &#8377;{product.price}
           </button>
         </div>
       </div>
