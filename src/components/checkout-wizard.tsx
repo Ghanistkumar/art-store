@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
-import { XMarkIcon, TrashIcon } from "@heroicons/react/24/solid";
+import { XMarkIcon } from "@heroicons/react/24/solid";
+import {ClipboardDocumentListIcon, TrashIcon} from "@heroicons/react/24/outline"
 import { IconButton, Typography, Box, Button } from "@mui/material";
 import useCart from "@/app/utils/cart-store";
 import { useRouter } from "next/navigation";
@@ -21,8 +22,14 @@ export default function CheckoutWizard({ open, close }: WizardProps) {
     cart.removeAll();
   };
 
+  const totalPayment = cart.items.reduce(
+    (total: number, item: any) => total + item.price,
+    0
+  );
+
   const CartItem = ({ item }: any) => (
     <div className="flex flex-row gap-4 justify-between items-center">
+      <div className="flex">
       <Image
         src={item.img}
         height={100}
@@ -30,6 +37,8 @@ export default function CheckoutWizard({ open, close }: WizardProps) {
         alt={item.title}
         className="object-cover"
       />
+      <div className="text-sm">{item.title}</div>
+      </div>
       <div>
         &#8377; {item.price}
         <IconButton
@@ -69,14 +78,24 @@ export default function CheckoutWizard({ open, close }: WizardProps) {
           <XMarkIcon className="h-6 w-6" />
         </IconButton>
 
-        <div className="flex flex-row justify-between items-center mt-5 mb-2 ">
           <Typography
             variant="h6"
             component="h2"
           >
-            Cart Summary
+            Your cart
           </Typography>
-          {cart?.items?.length != 0 && (
+          <hr className="mb-2"/>
+          <div className="flex flex-row justify-between items-center mt-5 mb-2 font-sans">
+            <div className="flex font-semibold">
+              <ClipboardDocumentListIcon className="h-5 w-5" /> Cart details
+            </div>
+            <div>
+              Total Items: <span className="font-semibold">{cart?.items?.length}</span> | To Pay: <span className="font-semibold">&#8377;{totalPayment}</span>
+            </div>
+          </div>
+          {/*
+        <div className="flex flex-row justify-between items-center mt-5 mb-2 ">
+           {cart?.items?.length != 0 && (
             <Button
               onClick={emptyCart}
               style={{
@@ -88,8 +107,9 @@ export default function CheckoutWizard({ open, close }: WizardProps) {
             >
               Empty Cart
             </Button>
-          )}
+          )} 
         </div>
+          */}
 
         {cart.items && cart.items.length > 0 ? (
           <div className="flex flex-col flex-grow overflow-y-auto gap-3">
