@@ -28,8 +28,7 @@ export default function CheckoutWizard({ open, close }: WizardProps) {
   );
 
   const CartItem = ({ item }: any) => (
-    <div className="flex flex-row gap-4 justify-between items-center">
-      <div className="flex">
+    <div className="flex flex-row gap-4 flex-nowrap justify-between items-center">
       <Image
         src={item.img}
         height={100}
@@ -38,14 +37,14 @@ export default function CheckoutWizard({ open, close }: WizardProps) {
         className="object-cover"
       />
       <div className="text-sm">{item.title}</div>
-      </div>
-      <div>
-        &#8377; {item.price}
+      <div className="flex items-center w-full justify-end">
+        <span>&#8377; {item.price}</span>
         <IconButton
           onClick={() => removeItem(item.id)}
           style={{ color: "black" }}
-        >
-          <TrashIcon className="h-6 w-6" />
+          size="small"
+          >
+          <TrashIcon className="h-5 w-5"/>
         </IconButton>
       </div>
     </div>
