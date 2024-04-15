@@ -1,56 +1,48 @@
-CREATE TABLE Products (
-    ProductID INT AUTO_INCREMENT PRIMARY KEY,
-    ProductName VARCHAR(255) NOT NULL,
-    Description TEXT,
-    Price DECIMAL(10, 2) NOT NULL,
-    StockQuantity INT NOT NULL,
-    CategoryID INT,
-    CreatedDate DATETIME NOT NULL,
-    ModifiedDate DATETIME NOT NULL,
-    FOREIGN KEY (CategoryID) REFERENCES Categories(CategoryID)
+CREATE TABLE categories (
+    category_id SERIAL PRIMARY KEY,
+    category_name VARCHAR(255) NOT NULL,
+    description TEXT
 );
 
-CREATE TABLE Categories (
-    CategoryID INT AUTO_INCREMENT PRIMARY KEY,
-    CategoryName VARCHAR(255) NOT NULL,
-    Description TEXT
+CREATE TABLE products (
+    product_id SERIAL PRIMARY KEY,
+    product_name VARCHAR(255) NOT NULL,
+    description TEXT,
+    price DECIMAL(10, 2) NOT NULL,
+    stock_quantity INT NOT NULL,
+    category_id INT,
+    created_date TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    modified_date TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    FOREIGN KEY (category_id) REFERENCES categories(category_id)
 );
 
-CREATE TABLE Users (
-    UserID INT AUTO_INCREMENT PRIMARY KEY,
-    Username VARCHAR(255) NOT NULL UNIQUE,
-    PasswordHash CHAR(64) NOT NULL,
-    Email VARCHAR(255) NOT NULL UNIQUE,
-    CreatedDate DATETIME NOT NULL,
-    ModifiedDate DATETIME NOT NULL
+CREATE TABLE users (
+    user_id SERIAL PRIMARY KEY,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    password_hash CHAR(64) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    created_date TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    modified_date TIMESTAMP WITHOUT TIME ZONE NOT NULL
 );
 
-CREATE TABLE Users (
-    UserID INT AUTO_INCREMENT PRIMARY KEY,
-    Username VARCHAR(255) NOT NULL UNIQUE,
-    PasswordHash CHAR(64) NOT NULL,
-    Email VARCHAR(255) NOT NULL UNIQUE,
-    CreatedDate DATETIME NOT NULL,
-    ModifiedDate DATETIME NOT NULL
+CREATE TABLE orders (
+    order_id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    order_date TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    shipping_address TEXT NOT NULL,
+    total_amount DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
-CREATE TABLE Orders (
-    OrderID INT AUTO_INCREMENT PRIMARY KEY,
-    UserID INT NOT NULL,
-    OrderDate DATETIME NOT NULL,
-    ShippingAddress TEXT NOT NULL,
-    TotalAmount DECIMAL(10, 2) NOT NULL,
-    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+CREATE TABLE order_details (
+    order_detail_id SERIAL PRIMARY KEY,
+    order_id INT NOT NULL,
+    product_id INT NOT NULL,
+    quantity INT NOT NULL,
+    price_at_purchase DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (order_id) REFERENCES orders(order_id),
+    FOREIGN KEY (product_id) REFERENCES products(product_id)
 );
 
-CREATE TABLE OrderDetails (
-    OrderDetailID INT AUTO_INCREMENT PRIMARY KEY,
-    OrderID INT NOT NULL,
-    ProductID INT NOT NULL,
-    Quantity INT NOT NULL,
-    PriceAtPurchase DECIMAL(10, 2) NOT NULL,
-    FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),
-    FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
-);
 
 https://www.youtube.com/watch?v=5miHyP6lExg

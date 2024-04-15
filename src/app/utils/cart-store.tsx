@@ -3,12 +3,12 @@ import { persist, createJSONStorage } from "zustand/middleware";
 import { toast } from "react-hot-toast";
 
 interface Product {
-  id: number;
+  product_id: number;
   img: string;
   tag: string;
-  title: string;
+  product_name: string;
   price: number;
-  desc: string;
+  description: string;
 }
 
 interface Category {
@@ -30,7 +30,7 @@ const useCart = create(
       items: [],
       addItem: (data: Product) => {
         const currentItem = get().items;
-        const existingItem = currentItem.find((item) => item.id === data.id);
+        const existingItem = currentItem.find((item) => item.product_id === data.product_id);
 
         if (existingItem) {
           return toast("Item Already Exists");
@@ -40,7 +40,7 @@ const useCart = create(
         toast.success("Item Added to Cart");
       },
       removeItem: (id: number) => {
-        set({ items: [...get().items.filter((item) => item.id !== id)] });
+        set({ items: [...get().items.filter((item) => item.product_id !== id)] });
         toast.success("Item Removed from Cart");
       },
       removeAll: () => set({ items: [] }),

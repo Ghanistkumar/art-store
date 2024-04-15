@@ -33,14 +33,14 @@ export default function CheckoutWizard({ open, close }: WizardProps) {
         src={item.img}
         height={100}
         width={100}
-        alt={item.title}
+        alt={item.product_name}
         className="object-cover"
       />
-      <div className="text-sm">{item.title}</div>
+      <div className="text-sm">{item.product_name}</div>
       <div className="flex items-center w-full justify-end">
         <span>&#8377; {item.price}</span>
         <IconButton
-          onClick={() => removeItem(item.id)}
+          onClick={() => removeItem(item.product_id)}
           style={{ color: "black" }}
           size="small"
           >
