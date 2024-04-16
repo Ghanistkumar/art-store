@@ -1,7 +1,5 @@
 import { sql } from "@vercel/postgres";
 import { unstable_noStore as noStore } from "next/cache";
-
-const { db } = require("@vercel/postgres");
 interface Product {
   product_id: number;
   img: string;
@@ -16,7 +14,7 @@ export async function fetchProducts() {
   // This is equivalent to in fetch(..., {cache: 'no-store'}).
 
   try {
-    const productData = await sql<Product>`SELECT * FROM products`;
+    const productData = await sql `SELECT * FROM products`;
 
     return productData.rows;
   } catch (error) {

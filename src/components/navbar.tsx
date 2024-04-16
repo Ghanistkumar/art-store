@@ -50,7 +50,7 @@ export function Navbar() {
               {NAV_MENU.map(({ name, icon: Icon, href }) => (
                 <Link key={name} href={href} passHref>
                   <Typography
-                    component="a"
+                    // component="a"
                     variant="body1"
                     color="textPrimary"
                     className="flex items-center gap-2 cursor-pointer text-black"
@@ -83,7 +83,7 @@ export function Navbar() {
                 {NAV_MENU.map(({ name, icon: Icon, href }) => (
                   <Link key={name} href={href} passHref>
                     <Typography
-                      component="a"
+                      // component="a"
                       variant="body1"
                       color="textPrimary"
                       className="flex items-center gap-2 cursor-pointer text-black"

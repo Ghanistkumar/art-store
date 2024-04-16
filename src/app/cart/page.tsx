@@ -37,7 +37,7 @@ export default function Page() {
   }>(DEFAULT_FORM_STATE);
 
   const totalPayment = cart.items.reduce(
-    (total: number, item: any) => total + item.price,
+    (total: number, item: any) => total + parseInt(item.price),
     0
   );
 
@@ -110,7 +110,7 @@ export default function Page() {
     const response = await axios.post(
       `${process.env.NEXT_PUBLIC_API_URL}/cart/checkout`,
       {
-        productIds: cart.items.map((item) => item.id),
+        productIds: cart.items.map((item) => item.product_id),
         shippingDetails: formData,
       }
     );
@@ -331,7 +331,7 @@ export default function Page() {
           ) : (
             cart.items.map((item) => (
               <div
-                key={item.id}
+                key={item.product_id}
                 className="flex flex-row sm:flex-row items-start gap-3 justify-between text-black mb-4 p-2 hover:bg-slate-200 rounded"
               >
                 <Image
@@ -339,11 +339,11 @@ export default function Page() {
                   width={100}
                   className="aspect-square rounded-md object-cover"
                   src={item.img}
-                  alt={item.title}
+                  alt={item.product_name}
                 />
                 <div className="md:text-left md:ml-4">
                   <p className="text-lg md:text-sm font-semibold">
-                    {item.title}
+                    {item.product_name}
                   </p>
                   <p>Price: &#8377;{item.price}</p>
                 </div>

@@ -23,7 +23,7 @@ export default function CheckoutWizard({ open, close }: WizardProps) {
   };
 
   const totalPayment = cart.items.reduce(
-    (total: number, item: any) => total + item.price,
+    (total: number, item: any) => total + parseInt(item.price),
     0
   );
 

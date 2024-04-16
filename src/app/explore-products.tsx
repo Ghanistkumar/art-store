@@ -1,10 +1,14 @@
 import { Typography } from "@mui/material"
 import ProductCard from "@/components/product-card"
 import { Key } from "react";
+import { fetchProducts } from "./lib/data";
+import { QueryResultRow } from "@vercel/postgres";
 
-const {PRODUCTS} = require("../app/lib/placeholder-data.js")
+// const {PRODUCTS} = require("../app/lib/placeholder-data.js")
 
-export function ExploreProducts() {
+export async function ExploreProducts() {
+
+  const PRODUCTS: QueryResultRow[] | any = await fetchProducts()
   return (
     <section className="px-8">
       <div className="container mx-auto mb-24 text-center">
