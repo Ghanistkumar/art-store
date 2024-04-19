@@ -25,7 +25,7 @@ interface SignUpState {
 export function SignupForm({ toggleView, close }: Props) {
   const initialState: SignUpState = {
     message: "",
-    errors: { username: [] },
+    errors: {},
   };
   const [loading, setLoading] = useState<boolean>(false);
   const [state, setState] = useState<SignUpState>(initialState);

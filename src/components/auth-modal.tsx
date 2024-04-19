@@ -23,7 +23,7 @@ const AuthModal = ({ open, close }: { open: boolean; close: () => void }) => {
         </DialogTitle>
         <DialogContent>
           {isLoginView ? (
-            <LoginForm toggleView={toggleView} />
+            <LoginForm toggleView={toggleView} close={close} />
           ) : (
             <SignupForm toggleView={toggleView} close={close}/>
           )}
