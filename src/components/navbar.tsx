@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { Typography, Button, Collapse, IconButton } from "@mui/material";
-import { useRouter } from "next/navigation";
+import AuthModal from "./auth-modal";
 
 import {
   RectangleStackIcon,
@@ -31,10 +31,14 @@ const NAV_MENU = [
 ];
 
 export function Navbar() {
-  const [open, setOpen] = useState(false);
-  const router = useRouter();
+  const [open, setOpen] = useState<boolean>(false);
+  const [openModal, setModal] = useState<boolean>(false);
 
+  const handleClose = () =>{
+    setModal(false);
+  }
   return (
+    <>
     <div className="px-10 sticky top-4 z-50">
       <div className="mx-auto container">
         <nav className="w-full max-w-screen-2xl rounded-xl px-8 shadow-md backdrop-saturate-200 backdrop-blur-2xl bg-opacity-80 border-white/80 bg-white z-50 mt-6 relative border-0 pr-3 py-3 pl-6">
@@ -62,7 +66,7 @@ export function Navbar() {
               ))}
             </div>
             <div className="hidden lg:flex items-center gap-4">
-              <Button variant="text" style={{ color: "black" }}>
+              <Button onClick={() => setModal(true)} variant="text" style={{ color: "black" }}>
                 Log in
               </Button>
             </div>
@@ -95,7 +99,7 @@ export function Navbar() {
                 ))}
               </div>
               <div className="mt-6 mb-4 flex items-center gap-4">
-                <Button variant="text" style={{ color: "black" }}>
+                <Button onClick={() => setModal(true)} variant="text" style={{ color: "black" }}>
                   Log in
                 </Button>
               </div>
@@ -104,6 +108,8 @@ export function Navbar() {
         </nav>
       </div>
     </div>
+    { openModal && <AuthModal open={openModal} close={handleClose}/>}
+  </>
   );
 }
 

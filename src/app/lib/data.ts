@@ -14,7 +14,7 @@ export async function fetchProducts() {
   // This is equivalent to in fetch(..., {cache: 'no-store'}).
 
   try {
-    const productData = await sql `SELECT * FROM products`;
+    const productData = await sql`SELECT * FROM products`;
 
     return productData.rows;
   } catch (error) {
@@ -27,7 +27,7 @@ export async function fetchProductsById(id: number) {
   noStore();
   // Add noStore() here to prevent the response from being cached.
   // This is equivalent to in fetch(..., {cache: 'no-store'}).
-//   await new Promise((resolve) => setTimeout(resolve, 3000));
+  //   await new Promise((resolve) => setTimeout(resolve, 3000));
   try {
     const singleProductData =
       await sql<Product>`SELECT * FROM products WHERE product_id = ${id}`;
@@ -37,13 +37,15 @@ export async function fetchProductsById(id: number) {
   }
 }
 
-// async function main() {
-//   const client = await db.connect();
-// }
-
-// main().catch((err) => {
-//   console.error(
-//     "An error occurred while attempting to seed the database:",
-//     err
-//   );
-// });
+export async function fetchEmail(email: string) {
+  noStore();
+  // Add noStore() here to prevent the response from being cached.
+  // This is equivalent to in fetch(..., {cache: 'no-store'}).
+  //   await new Promise((resolve) => setTimeout(resolve, 3000));
+  try {
+    const emailId = await sql`Select email from users WHERE email=${email}`;
+    return emailId.rowCount;
+  } catch (error) {
+    // console.error("Database Error:", error);
+  }
+}

@@ -6,3 +6,8 @@ export interface Product {
     price: number;
     description: string;
 }
+export interface Users {
+    username: string;
+    email: string;
+    password: string;
+}
