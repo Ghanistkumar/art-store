@@ -4,22 +4,26 @@ import { persist, createJSONStorage } from "zustand/middleware";
 
 type Store = {
   username: string;
-  setUser: (data: Users) => void;
+  setUser: (username: string) => void;
+  getUserName: () => void;
+  removeUser: () => void;
 };
 
-const userStore = create(
+const useUserStore = create(
   persist<Store>(
-    (set) => ({
+    (set, get) => ({
       username: "",
-      setUser: (data) => {
-        set({ username: data.username });
+      setUser: (username) => {
+        console.log(username)
+        set({ username: username });
       },
+      getUserName: () => get().username,
       removeUser: () => set({ username: ''})
     }),
     {
-      name: "cart-storage",
+      name: "user-storage",
       storage: createJSONStorage(() => localStorage),
     }
   )
 );
-export default userStore;
+export default useUserStore;

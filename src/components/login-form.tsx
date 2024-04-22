@@ -15,6 +15,8 @@ import {
   ExclamationCircleIcon,
 } from "@heroicons/react/16/solid";
 import toast from "react-hot-toast";
+import useUserStore from "@/app/utils/user-store";
+import { redirect } from "next/navigation";
 interface Props {
   toggleView: () => void;
   close: () => void;
@@ -33,6 +35,7 @@ const LoginForm = ({ toggleView, close }: Props) => {
     message: "",
     errors: {},
   };
+  const useStore = useUserStore();
   const [loading, setLoading] = useState<boolean>(false);
   const [state, setState] = useState<SignInState>(initialState);
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -57,7 +60,8 @@ const LoginForm = ({ toggleView, close }: Props) => {
           } else {
             setLoading(false);
             close();
-            toast.success("Success");
+            useStore.setUser(result?.username)
+            toast.success("Successfull Logged In");
           }
         })
         .catch((error) => {

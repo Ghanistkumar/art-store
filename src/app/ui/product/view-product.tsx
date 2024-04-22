@@ -12,7 +12,6 @@ export default function ViewProduct({ product }: any) {
   const handleAddtoCart: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
     cart.addItem(product);
-    console.log(cart?.items);
     setOpen(true);
   };
   return (

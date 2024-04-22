@@ -3,7 +3,6 @@ import { sql } from "@vercel/postgres";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import userStore from "../utils/user-store";
 const bcrypt = require("bcrypt");
 
 export type State = {
@@ -28,6 +27,7 @@ const SignUpFormSchema = z.object({
   email: z.string().email("Invalid email format"),
   password: z
     .string()
+    .trim()
     .min(1, "Password is required")
     .min(6, "Password must be more than 6 characters")
     .max(32, "Password must be less than 32 characters"),
@@ -60,7 +60,7 @@ export async function createUser(prevState: State, formData: FormData) {
     };
   }
   try {
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 5);
     await sql`INSERT INTO users (username,password_hash,email,created_date,modified_date) VALUES (${username}, ${hashedPassword}, ${email}, NOW(), NOW())`;
   } catch (error) {
     console.error("add User Error:", error);
@@ -103,12 +103,9 @@ export async function signIn(prevState: UserState, formData: FormData) {
         errors: [],
         message: "Invalid Username / Password",
       }
-    } 
+    }
     const passwordsMatch = await bcrypt.compare(password, user.password_hash);
-    console.log(passwordsMatch)
     if (passwordsMatch){
-      const cart = userStore();
-      cart.setUser(user.username)
       return user;
     } else {
       return {

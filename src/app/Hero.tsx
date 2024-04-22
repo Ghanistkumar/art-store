@@ -8,8 +8,8 @@ function Hero() {
     <div className="!flex h-[55vh] w-full items-center justify-between px-10">
       <Image
         width={920}
-        height={720}
-        src="/image/image8.svg"
+        height={620}
+        src="/image/background_1_HD.png"
         alt="bg-img"
         className="absolute inset-0 ml-auto w-[920px] h-[780px] rounded-bl-[100px] object-cover object-center"
       />
