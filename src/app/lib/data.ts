@@ -1,5 +1,6 @@
 import { sql } from "@vercel/postgres";
 import { unstable_noStore as noStore } from "next/cache";
+import { Category } from "../../../type";
 interface Product {
   product_id: number;
   img: string;
@@ -47,5 +48,16 @@ export async function fetchEmail(email: string) {
     return emailId.rowCount;
   } catch (error) {
     // console.error("Database Error:", error);
+  }
+}
+
+export async function fetchCategories() {
+  noStore();
+  try {
+    const categoriesData = await sql`SELECT * FROM categories`;
+    return categoriesData.rows;
+  } catch (error) {
+    // console.error("Database Error:", error);
+    // throw new Error("Failed to fetch product data.");
   }
 }

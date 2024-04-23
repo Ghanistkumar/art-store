@@ -11,3 +11,10 @@ export interface Users {
     email: string;
     password: string;
 }
+
+export interface Category {
+    category_id: number;
+    category_name: string;
+    description: string;
+    imagepath: string;
+}

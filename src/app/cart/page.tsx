@@ -121,247 +121,255 @@ export default function Page() {
   return (
     <>
       <Navbar />
-      <div className="container mx-auto flex flex-col md:flex-row justify-between mt-5 p-4 md:p-8">
-        <div className="flex flex-col justify-evenly md:w-2/3 bg-slate-100 rounded-xl p-5 m-5 shadow-lg gap-y-4">
-          <h2 className="font-bold text-xl mb-4">Shipping Details</h2>
-          <div className="flex flex-col md:flex-row gap-4">
-            <FormControl fullWidth className="md:flex-1">
-              <TextField
-                error={formData.firstName.error}
-                id="outlined-error"
-                label="First Name"
-                value={formData.firstName.value}
-                fullWidth
-                onChange={(e) => {
-                  setFormData({
-                    ...formData,
-                    firstName: {
-                      value: e.target.value,
-                      error: false,
-                    },
-                  });
-                }}
-                required
-                className="text-black"
-              />
-              {formData.firstName.error && (
-                <FormHelperText className="text-red-500">
-                  Please Enter First Name
-                </FormHelperText>
-              )}
-            </FormControl>
-            <FormControl fullWidth className="md:flex-1">
-              <TextField
-                error={formData.lastName.error}
-                id="outlined-error"
-                label="Last Name"
-                value={formData.lastName.value}
-                fullWidth
-                onChange={(e) => {
-                  setFormData({
-                    ...formData,
-                    lastName: {
-                      value: e.target.value,
-                      error: false,
-                    },
-                  });
-                }}
-                required
-              />
-              {formData.lastName.error && (
-                <FormHelperText className="text-red-500">
-                  Please Enter Last Name
-                </FormHelperText>
-              )}
-            </FormControl>
-          </div>
-          <div className="flex flex-col md:flex-row gap-4">
-            <FormControl fullWidth className="md:flex-1">
-              <TextField
-                error={formData.phoneNumber.error}
-                id="outlined-error"
-                label="Phone Number"
-                value={formData.phoneNumber.value}
-                fullWidth
-                onChange={(e) => {
-                  setFormData({
-                    ...formData,
-                    phoneNumber: {
-                      value: e.target.value,
-                      error: false,
-                    },
-                  });
-                }}
-                required
-              />
-              {formData.phoneNumber.error && (
-                <FormHelperText className="text-red-500">
-                  Please Enter Phone Number
-                </FormHelperText>
-              )}
-            </FormControl>
-            <FormControl fullWidth className="md:flex-1">
-              <TextField
-                error={formData.email.error}
-                id="outlined-error"
-                label="Email"
-                value={formData.email.value}
-                fullWidth
-                onChange={(e) => {
-                  setFormData({
-                    ...formData,
-                    email: {
-                      value: e.target.value,
-                      error: false,
-                    },
-                  });
-                }}
-                required
-              />
-              {formData.email.error && (
-                <FormHelperText className="text-red-500">
-                  Please Enter Email
-                </FormHelperText>
-              )}
-            </FormControl>
-          </div>
-          <FormControl fullWidth className="md:flex-1">
-            <TextField
-              error={formData.addressLine1.error}
-              id="outlined-error"
-              label="Address Line 1"
-              value={formData.addressLine1.value}
-              fullWidth
-              onChange={(e) => {
-                setFormData({
-                  ...formData,
-                  addressLine1: {
-                    value: e.target.value,
-                    error: false,
-                  },
-                });
-              }}
-              required
-            />
-            {formData.addressLine1.error && (
-              <FormHelperText className="text-red-500">
-                Please Enter Address Line 1
-              </FormHelperText>
-            )}
-          </FormControl>
-          <FormControl fullWidth className="md:flex-1">
-            <TextField
-              error={formData.addressLine2.error}
-              id="outlined-error"
-              label="Address Line 2"
-              value={formData.addressLine2.value}
-              fullWidth
-              onChange={(e) => {
-                setFormData({
-                  ...formData,
-                  addressLine2: {
-                    value: e.target.value,
-                    error: false,
-                  },
-                });
-              }}
-              required
-            />
-            {formData.addressLine2.error && (
-              <FormHelperText className="text-red-500">
-                Please Enter Address Line 2
-              </FormHelperText>
-            )}
-          </FormControl>
-          <div className="flex flex-col md:flex-row gap-4">
-            <FormControl fullWidth className="md:flex-1">
-              <TextField
-                error={formData.pincode.error}
-                id="outlined-error"
-                label="Pincode"
-                value={formData.pincode.value}
-                fullWidth
-                onChange={(e) => {
-                  setFormData({
-                    ...formData,
-                    pincode: {
-                      value: e.target.value,
-                      error: false,
-                    },
-                  });
-                }}
-                required
-              />
-              {formData.pincode.error && (
-                <FormHelperText className="text-red-500">
-                  Please Enter Pincode
-                </FormHelperText>
-              )}
-            </FormControl>
-            <FormControl fullWidth className="md:flex-1">
-              <TextField
-                error={formData.state.error}
-                id="outlined-error"
-                label="State"
-                value={formData.state.value}
-                fullWidth
-                onChange={(e) => {
-                  setFormData({
-                    ...formData,
-                    state: {
-                      value: e.target.value,
-                      error: false,
-                    },
-                  });
-                }}
-                required
-              />
-              {formData.state.error && (
-                <FormHelperText className="text-red-500">
-                  Please Enter State
-                </FormHelperText>
-              )}
-            </FormControl>
+      {cart?.items && cart.items.length === 0 ? (
+        <div className="flex justify-center m-24">
+          <div className="flex flex-1 justify-center md:w-1/3 bg-slate-100 rounded-xl p-5 m-5 shadow-lg">
+            No Items in Cart :(
           </div>
         </div>
-        <div className="md:w-1/3 bg-slate-100 rounded-xl p-5 m-5 shadow-lg flex flex-col md:items-start">
-          <h2 className="font-bold text-xl mb-4">Order Summary</h2>
-          {cart.items.length === 0 ? (
-            <p>No Items in cart</p>
-          ) : (
-            cart.items.map((item) => (
-              <div
-                key={item.product_id}
-                className="flex flex-row sm:flex-row items-start gap-3 justify-between text-black mb-4 p-2 hover:bg-slate-200 rounded"
-              >
-                <Image
-                  height={100}
-                  width={100}
-                  className="aspect-square rounded-md object-cover"
-                  src={item.img}
-                  alt={item.product_name}
+      ) : (
+        <div className="container mx-auto flex flex-col md:flex-row justify-between mt-5 p-4 md:p-8">
+          <div className="flex flex-col justify-evenly md:w-2/3 bg-slate-100 rounded-xl p-5 m-5 shadow-lg gap-y-4">
+            <h2 className="font-bold text-xl mb-4">Shipping Details</h2>
+            <div className="flex flex-col md:flex-row gap-4">
+              <FormControl fullWidth className="md:flex-1">
+                <TextField
+                  error={formData.firstName.error}
+                  id="outlined-error"
+                  label="First Name"
+                  value={formData.firstName.value}
+                  fullWidth
+                  onChange={(e) => {
+                    setFormData({
+                      ...formData,
+                      firstName: {
+                        value: e.target.value.trim(),
+                        error: false,
+                      },
+                    });
+                  }}
+                  required
+                  className="text-black"
                 />
-                <div className="md:text-left md:ml-4">
-                  <p className="text-lg md:text-sm font-semibold">
-                    {item.product_name}
-                  </p>
-                  <p>Price: &#8377;{item.price}</p>
+                {formData.firstName.error && (
+                  <FormHelperText className="text-red-500">
+                    Please Enter First Name
+                  </FormHelperText>
+                )}
+              </FormControl>
+              <FormControl fullWidth className="md:flex-1">
+                <TextField
+                  error={formData.lastName.error}
+                  id="outlined-error"
+                  label="Last Name"
+                  value={formData.lastName.value}
+                  fullWidth
+                  onChange={(e) => {
+                    setFormData({
+                      ...formData,
+                      lastName: {
+                        value: e.target.value.trim(),
+                        error: false,
+                      },
+                    });
+                  }}
+                  required
+                />
+                {formData.lastName.error && (
+                  <FormHelperText className="text-red-500">
+                    Please Enter Last Name
+                  </FormHelperText>
+                )}
+              </FormControl>
+            </div>
+            <div className="flex flex-col md:flex-row gap-4">
+              <FormControl fullWidth className="md:flex-1">
+                <TextField
+                  error={formData.phoneNumber.error}
+                  id="outlined-error"
+                  label="Phone Number"
+                  value={formData.phoneNumber.value}
+                  fullWidth
+                  onChange={(e) => {
+                    setFormData({
+                      ...formData,
+                      phoneNumber: {
+                        value: e.target.value.trim(),
+                        error: false,
+                      },
+                    });
+                  }}
+                  required
+                />
+                {formData.phoneNumber.error && (
+                  <FormHelperText className="text-red-500">
+                    Please Enter Phone Number
+                  </FormHelperText>
+                )}
+              </FormControl>
+              <FormControl fullWidth className="md:flex-1">
+                <TextField
+                  error={formData.email.error}
+                  id="outlined-error"
+                  label="Email"
+                  value={formData.email.value}
+                  fullWidth
+                  onChange={(e) => {
+                    setFormData({
+                      ...formData,
+                      email: {
+                        value: e.target.value.trim(),
+                        error: false,
+                      },
+                    });
+                  }}
+                  required
+                />
+                {formData.email.error && (
+                  <FormHelperText className="text-red-500">
+                    Please Enter Email
+                  </FormHelperText>
+                )}
+              </FormControl>
+            </div>
+            <FormControl fullWidth className="md:flex-1">
+              <TextField
+                error={formData.addressLine1.error}
+                id="outlined-error"
+                label="Address Line 1"
+                value={formData.addressLine1.value}
+                fullWidth
+                onChange={(e) => {
+                  setFormData({
+                    ...formData,
+                    addressLine1: {
+                      value: e.target.value,
+                      error: false,
+                    },
+                  });
+                }}
+                required
+              />
+              {formData.addressLine1.error && (
+                <FormHelperText className="text-red-500">
+                  Please Enter Address Line 1
+                </FormHelperText>
+              )}
+            </FormControl>
+            <FormControl fullWidth className="md:flex-1">
+              <TextField
+                error={formData.addressLine2.error}
+                id="outlined-error"
+                label="Address Line 2"
+                value={formData.addressLine2.value}
+                fullWidth
+                onChange={(e) => {
+                  setFormData({
+                    ...formData,
+                    addressLine2: {
+                      value: e.target.value,
+                      error: false,
+                    },
+                  });
+                }}
+                required
+              />
+              {formData.addressLine2.error && (
+                <FormHelperText className="text-red-500">
+                  Please Enter Address Line 2
+                </FormHelperText>
+              )}
+            </FormControl>
+            <div className="flex flex-col md:flex-row gap-4">
+              <FormControl fullWidth className="md:flex-1">
+                <TextField
+                  error={formData.pincode.error}
+                  id="outlined-error"
+                  label="Pincode"
+                  value={formData.pincode.value}
+                  fullWidth
+                  onChange={(e) => {
+                    setFormData({
+                      ...formData,
+                      pincode: {
+                        value: e.target.value,
+                        error: false,
+                      },
+                    });
+                  }}
+                  required
+                />
+                {formData.pincode.error && (
+                  <FormHelperText className="text-red-500">
+                    Please Enter Pincode
+                  </FormHelperText>
+                )}
+              </FormControl>
+              <FormControl fullWidth className="md:flex-1">
+                <TextField
+                  error={formData.state.error}
+                  id="outlined-error"
+                  label="State"
+                  value={formData.state.value}
+                  fullWidth
+                  onChange={(e) => {
+                    setFormData({
+                      ...formData,
+                      state: {
+                        value: e.target.value.trim(),
+                        error: false,
+                      },
+                    });
+                  }}
+                  required
+                />
+                {formData.state.error && (
+                  <FormHelperText className="text-red-500">
+                    Please Enter State
+                  </FormHelperText>
+                )}
+              </FormControl>
+            </div>
+          </div>
+          <div className="md:w-1/3 bg-slate-100 rounded-xl p-5 m-5 shadow-lg flex flex-col md:items-start">
+            <h2 className="font-bold text-xl mb-4">Order Summary</h2>
+            {cart.items.length === 0 ? (
+              <p>No Items in cart</p>
+            ) : (
+              cart.items.map((item) => (
+                <div
+                  key={item.product_id}
+                  className="flex flex-row sm:flex-row items-start gap-3 justify-between text-black mb-4 p-2 hover:bg-slate-200 rounded"
+                >
+                  <Image
+                    height={100}
+                    width={100}
+                    className="aspect-square rounded-md object-cover"
+                    src={item.img}
+                    alt={item.product_name}
+                  />
+                  <div className="md:text-left md:ml-4">
+                    <p className="text-lg md:text-sm font-semibold">
+                      {item.product_name}
+                    </p>
+                    <p>Price: &#8377;{item.price}</p>
+                  </div>
                 </div>
-              </div>
-            ))
-          )}
-          <h2 className="font-bold text-xl mb-4">Price Summary</h2>
-          {/* <p className="text-2xl">&#8377;{totalPayment.toFixed(2)}</p> */}
+              ))
+            )}
+            <h2 className="font-bold text-xl mb-4">Price Summary</h2>
+            {/* <p className="text-2xl">&#8377;{totalPayment.toFixed(2)}</p> */}
 
-          <button
-            type="button"
-            className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition duration-300 ease-in-out transform hover:scale-105"
-            onClick={onCheckout}
-          >
-            &#8377;{totalPayment.toFixed(2)}   Proceed to Pay!!
-          </button>
+            <button
+              type="button"
+              className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition duration-300 ease-in-out transform hover:scale-105"
+              onClick={onCheckout}
+            >
+              &#8377;{totalPayment.toFixed(2)} Proceed to Pay!!
+            </button>
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 }
