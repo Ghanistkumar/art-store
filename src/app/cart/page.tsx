@@ -1,10 +1,11 @@
 "use client";
 import useCart from "../utils/cart-store";
+import useUserStore from "../utils/user-store";
 import Image from "next/image";
-import axios from "axios";
 import { useState } from "react";
 import { Navbar } from "@/components";
 import { TextField, Button, FormControl, FormHelperText } from "@mui/material";
+import { placeOrder, sendOrderDetails } from "../lib/actions";
 
 type obj<E> = {
   value: E;
@@ -13,6 +14,7 @@ type obj<E> = {
 
 export default function Page() {
   const cart = useCart();
+  const user = useUserStore();
 
   const DEFAULT_FORM_STATE = {
     firstName: { value: "", error: false },
@@ -107,15 +109,43 @@ export default function Page() {
       return;
     }
 
-    const response = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/cart/checkout`,
-      {
-        productIds: cart.items.map((item) => item.product_id),
-        shippingDetails: formData,
-      }
+    // const response = await axios.post(
+    //   `${process.env.NEXT_PUBLIC_API_URL}/cart/checkout`,
+    //   {
+    //     productIds: cart.items.map((item) => item.product_id),
+    //     shippingDetails: formData,
+    //   }
+    // );
+    const shippingAddress =
+      formData.addressLine1.value +
+      ", " +
+      formData.addressLine2.value +
+      ", " +
+      formData.pincode.value +
+      ", " +
+      formData.state.value;
+
+    //saves current user order details with shipping add
+    const order = await placeOrder(
+      shippingAddress,
+      user.user_id ?? "guest user",
+      totalPayment
     );
 
-    window.location = response.data.url;
+    if (order?.order_id) {
+      const products = cart.items;
+      for (var i = 0; i < products.length; i++) {
+        console.log(products[0].product_id);
+        const res = await sendOrderDetails(
+          order.order_id,
+          products[`${i}`].product_id.toString(),
+          0,
+          products[`${i}`].price
+        );
+      }
+    }
+
+    // window.location = response.data.url;
   };
 
   return (

@@ -7,7 +7,7 @@ import ViewProduct from "@/app/ui/product/view-product";
 export default async function Page({ params }: { params: { id: string } }) {
 
   const productId = params.id;
-  const product = await fetchProductsById(parseInt(productId));
+  const product = await fetchProductsById(productId);
 
   if (!product) {
     notFound();

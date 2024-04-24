@@ -18,3 +18,11 @@ export interface Category {
     description: string;
     imagepath: string;
 }
+
+export interface ShippingDetails {
+   
+    addressLine1: string;
+    addressLine2: string;
+    pincode: string;
+    state: string;
+}

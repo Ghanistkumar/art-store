@@ -5,7 +5,7 @@ CREATE TABLE categories (
 );
 
 CREATE TABLE products (
-    product_id SERIAL PRIMARY KEY,
+    product_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     product_name VARCHAR(255) NOT NULL,
     description TEXT,
     price DECIMAL(10, 2) NOT NULL,
@@ -13,21 +13,23 @@ CREATE TABLE products (
     category_id INT,
     created_date TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     modified_date TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    img VARCHAR(255),
+    tag VARCHAR(255),
     FOREIGN KEY (category_id) REFERENCES categories(category_id)
 );
 
 CREATE TABLE users (
-    user_id SERIAL PRIMARY KEY,
+    user_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     username VARCHAR(255) NOT NULL,
     password_hash VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
-    created_date TIMESTAMP WITHOUT TIME ZONE NOT NULL,
-    modified_date TIMESTAMP WITHOUT TIME ZONE NOT NULL
+    created_date TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    modified_date TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE orders (
     order_id SERIAL PRIMARY KEY,
-    user_id INT NOT NULL,
+    user_id UUID NOT NULL, 
     order_date TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     shipping_address TEXT NOT NULL,
     total_amount DECIMAL(10, 2) NOT NULL,
@@ -35,14 +37,14 @@ CREATE TABLE orders (
 );
 
 CREATE TABLE order_details (
-    order_detail_id SERIAL PRIMARY KEY,
-    order_id INT NOT NULL,
-    product_id INT NOT NULL,
+    order_detail_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    order_id INT NOT NULL, 
+    product_id UUID NOT NULL, 
     quantity INT NOT NULL,
     price_at_purchase DECIMAL(10, 2) NOT NULL,
     FOREIGN KEY (order_id) REFERENCES orders(order_id),
     FOREIGN KEY (product_id) REFERENCES products(product_id)
 );
 
-
+10 138 115
 https://www.youtube.com/watch?v=5miHyP6lExg

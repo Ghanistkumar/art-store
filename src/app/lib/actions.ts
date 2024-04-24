@@ -3,6 +3,7 @@ import { sql } from "@vercel/postgres";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { ShippingDetails } from "../../../type";
 const bcrypt = require("bcrypt");
 
 export type State = {
@@ -72,7 +73,7 @@ export async function createUser(prevState: State, formData: FormData) {
 
 async function getUser(email: string){
   try {
-    const user = await sql`SELECT * FROM users WHERE email=${email}`;
+    const user = await sql`SELECT user_id, email, username, password_hash FROM users WHERE email=${email}`;
     return user.rows[0];
   } catch (error) {
     console.error("Failed to fetch user:", error);
@@ -116,4 +117,33 @@ export async function signIn(prevState: UserState, formData: FormData) {
   }
 
   return null;
+}
+
+export async function placeOrder(
+  shippingAddress: string,
+  user_id: string,
+  totalAmount: number
+) {
+  try {
+    const order_id =
+      await sql`INSERT INTO orders (user_id, order_date, shipping_address, total_amount)
+    VALUES (${user_id}, NOW(), ${shippingAddress}, ${totalAmount}) RETURNING order_id`;
+    return order_id.rows[0];
+  } catch (error) {
+    console.error("Failed to add Order:", error);
+  }
+}
+
+export async function sendOrderDetails(
+  orderId: string,
+  product_id: string,
+  quantity: number,
+  price: number
+) {
+  try {
+    await sql`INSERT INTO order_details (order_id, product_id, quantity, price_at_purchase)
+    VALUES (${orderId}, ${product_id}, ${quantity}, ${price});`;
+  } catch (err) {
+    console.error("Failed to add Order details:", err);
+  }
 }

@@ -4,7 +4,8 @@ import { persist, createJSONStorage } from "zustand/middleware";
 
 type Store = {
   username: string;
-  setUser: (username: string) => void;
+  user_id: string;
+  setUser: (username: string, user_id: string) => void;
   getUserName: () => void;
   removeUser: () => void;
 };
@@ -13,9 +14,10 @@ const useUserStore = create(
   persist<Store>(
     (set, get) => ({
       username: "",
-      setUser: (username) => {
+      user_id: '',
+      setUser: (username, user_id) => {
         console.log(username)
-        set({ username: username });
+        set({ username: username, user_id: user_id });
       },
       getUserName: () => get().username,
       removeUser: () => set({ username: ''})

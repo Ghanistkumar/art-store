@@ -60,7 +60,8 @@ const LoginForm = ({ toggleView, close }: Props) => {
           } else {
             setLoading(false);
             close();
-            useStore.setUser(result?.username)
+            console.log(result)
+            useStore.setUser(result?.username, result?.user_id)
             toast.success("Successfull Logged In");
           }
         })

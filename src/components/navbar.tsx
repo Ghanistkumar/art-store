@@ -86,7 +86,7 @@ export function Navbar() {
               <div className="hidden lg:flex items-center gap-4">
                 {username && username != null && username != "" ? (
                   <>
-                    <p className="text-black font-semibold">{username}</p>
+                    <p className="text-black font-semibold">{'Welcome ' + username.toUpperCase()}</p>
                     <IconButton
                       onClick={handleLogOut}
                       style={{ color: "black" }}
@@ -139,7 +139,7 @@ export function Navbar() {
                   {username && username != null && username != "" ? (
                     <>
                       <span className="text-black font-semibold">
-                        {username}
+                        {'Welcome ' + username.toUpperCase()}
                       </span>
                       <IconButton
                         onClick={handleLogOut}

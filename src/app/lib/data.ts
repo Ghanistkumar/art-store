@@ -24,7 +24,7 @@ export async function fetchProducts() {
   }
 }
 
-export async function fetchProductsById(id: number) {
+export async function fetchProductsById(id: string) {
   noStore();
   // Add noStore() here to prevent the response from being cached.
   // This is equivalent to in fetch(..., {cache: 'no-store'}).
