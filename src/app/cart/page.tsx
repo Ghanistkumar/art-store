@@ -2,10 +2,13 @@
 import useCart from "../utils/cart-store";
 import useUserStore from "../utils/user-store";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Navbar } from "@/components";
 import { TextField, Button, FormControl, FormHelperText } from "@mui/material";
 import { placeOrder, sendOrderDetails } from "../lib/actions";
+import Swal from 'sweetalert2'
+import { PaymentRes } from "../../../type";
+import { useRouter } from "next/navigation";
 
 type obj<E> = {
   value: E;
@@ -13,8 +16,11 @@ type obj<E> = {
 };
 
 export default function Page() {
+
   const cart = useCart();
   const user = useUserStore();
+  const router = useRouter();
+  const [isRazorpayLoading, setIsRazorpayLoading] = useState(true);
 
   const DEFAULT_FORM_STATE = {
     firstName: { value: "", error: false },
@@ -42,8 +48,23 @@ export default function Page() {
     (total: number, item: any) => total + parseInt(item.price),
     0
   );
+  useEffect(() => {
+    const loadScript = async () => {
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.onload = () => {
+        setIsRazorpayLoading(false);
+      };
+      document.body.appendChild(script);
+    };
 
-  const onCheckout = async () => {
+    if (!window.Razorpay) {
+      loadScript();
+    } else {
+      setIsRazorpayLoading(false);
+    }
+  }, []);
+  const onCheckout = async (e: any) => {
     if (formData.firstName.value === "") {
       setFormData({
         ...formData,
@@ -109,43 +130,123 @@ export default function Page() {
       return;
     }
 
-    // const response = await axios.post(
-    //   `${process.env.NEXT_PUBLIC_API_URL}/cart/checkout`,
-    //   {
-    //     productIds: cart.items.map((item) => item.product_id),
-    //     shippingDetails: formData,
-    //   }
-    // );
-    const shippingAddress =
-      formData.addressLine1.value +
-      ", " +
-      formData.addressLine2.value +
-      ", " +
-      formData.pincode.value +
-      ", " +
-      formData.state.value;
+    const response = await fetch("http://localhost:4000/order", {
+      method: "POST",
+      body: JSON.stringify({
+        amount: totalPayment * 100,
+        currency: "INR",
+        receipt: "rec#1",
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const order = await response.json();
+    console.log(order);
+    var options = {
+      key: "rzp_test_wWb6Mi28PgLWik", 
+      amount: totalPayment * 100,
+      currency: "INR",
+      name: "Acme Corp", 
+      description: "Test Transaction",
+      image: "https://example.com/your_logo",
+      order_id: order.id,
+      handler: async function (response: any) {
+        const body = {
+          ...response,
+        };
 
-    //saves current user order details with shipping add
-    const order = await placeOrder(
-      shippingAddress,
-      user.user_id ?? "guest user",
-      totalPayment
+        const validateRes = await fetch(
+          "http://localhost:4000/order/validate",
+          {
+            method: "POST",
+            body: JSON.stringify(body),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const paymentValid = await validateRes.json();
+        if(paymentValid.msg === 'success'){
+          Swal.fire({
+            title: 'Thank You!',
+            text: 'Order Details Sent on Mail!!',
+            icon: 'success',
+            confirmButtonText: 'Ok'
+          }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+              router.push('/')
+            }
+          });
+        }
+        
+      },
+      prefill: {
+        
+        name: `${formData.firstName.value}`,
+        email: `${formData.email.value}`,
+        contact: `${formData.phoneNumber.value}`, 
+      },
+      notes: {
+        address: "Razorpay Corporate Office",
+      },
+      theme: {
+        color: "#3399cc",
+      },
+    };
+
+    var rzp1 = new window.Razorpay(options);
+    rzp1.on(
+      "payment.failed",
+      function (response: PaymentRes) {
+        // alert(response.error.code);
+        // alert(response.error.description);
+        // alert(response.error.source);
+        // alert(response.error.step);
+        // alert(response.error.reason);
+        // alert(response.error.metadata.order_id);
+        // alert(response.error.metadata.payment_id);
+        Swal.fire({
+          title: 'Error!',
+          text: `${response.error.reason}`,
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        })
+      }
     );
 
-    if (order?.order_id) {
-      const products = cart.items;
-      for (var i = 0; i < products.length; i++) {
-        console.log(products[0].product_id);
-        const res = await sendOrderDetails(
-          order.order_id,
-          products[`${i}`].product_id.toString(),
-          0,
-          products[`${i}`].price
-        );
-      }
-    }
+    rzp1.open();
+    e.preventDefault();
 
-    // window.location = response.data.url;
+    // const shippingAddress =
+    //   formData.addressLine1.value +
+    //   ", " +
+    //   formData.addressLine2.value +
+    //   ", " +
+    //   formData.pincode.value +
+    //   ", " +
+    //   formData.state.value;
+
+    // //saves current user order details with shipping add
+    // const order = await placeOrder(
+    //   shippingAddress,
+    //   user.user_id ?? "guest user",
+    //   totalPayment
+    // );
+
+    // if (order?.order_id) {
+    //   const products = cart.items;
+    //   for (var i = 0; i < products.length; i++) {
+    //     console.log(products[0].product_id);
+    //     const res = await sendOrderDetails(
+    //       order.order_id,
+    //       products[`${i}`].product_id.toString(),
+    //       0,
+    //       products[`${i}`].price
+    //     );
+    //   }
+    // }
   };
 
   return (
@@ -394,6 +495,7 @@ export default function Page() {
               type="button"
               className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition duration-300 ease-in-out transform hover:scale-105"
               onClick={onCheckout}
+              disabled={isRazorpayLoading}
             >
               &#8377;{totalPayment.toFixed(2)} Proceed to Pay!!
             </button>

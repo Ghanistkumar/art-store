@@ -26,3 +26,14 @@ export interface ShippingDetails {
     pincode: string;
     state: string;
 }
+
+export interface PaymentRes {
+    error: {
+      code: any;
+      description: any;
+      source: any;
+      step: any;
+      reason: any;
+      metadata: { order_id: any; payment_id: any };
+    };
+  }

@@ -22,6 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
       <link rel="icon" href="/logos/title_logo-transparent.svg" />
+      <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
       </head>
       <body className={inter.className}>
         <ToastProvider />
@@ -32,3 +33,19 @@ export default function RootLayout({
     </html>
   );
 }
+// useEffect(() => {
+//   const loadScript = async () => {
+//     const script = document.createElement('script');
+//     script.src = "https://checkout.razorpay.com/v1/checkout.js";
+//     script.onload = () => {
+//       setIsRazorpayLoading(false);
+//     };
+//     document.body.appendChild(script);
+//   };
+
+//   if (!window.Razorpay) {
+//     loadScript();
+//   } else {
+//     setIsRazorpayLoading(false);
+//   }
+// }, []);
