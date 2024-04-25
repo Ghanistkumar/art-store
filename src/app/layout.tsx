@@ -22,7 +22,6 @@ export default function RootLayout({
     <html lang="en">
       <head>
       <link rel="icon" href="/logos/title_logo-transparent.svg" />
-      <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
       </head>
       <body className={inter.className}>
         <ToastProvider />

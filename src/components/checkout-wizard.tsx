@@ -72,7 +72,6 @@ export default function CheckoutWizard({ open, close }: WizardProps) {
         <IconButton
           onClick={close}
           sx={{ position: "absolute", right: 8, top: 8 }}
-          aria-price="Close cart summary"
         >
           <XMarkIcon className="h-6 w-6" />
         </IconButton>
