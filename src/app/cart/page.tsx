@@ -7,6 +7,7 @@ import { Navbar } from "@/components";
 import { TextField, Button, FormControl, FormHelperText } from "@mui/material";
 import { placeOrder, sendOrderDetails } from "../lib/actions";
 import Swal from 'sweetalert2'
+import { Suspense } from "react";
 import { PaymentRes } from "../../../type";
 import { useRouter } from "next/navigation";
 
@@ -252,6 +253,7 @@ export default function Page() {
   return (
     <>
       <Navbar />
+      <Suspense fallback={<p>Loading...</p>}>
       {cart?.items && cart.items.length === 0 ? (
         <div className="flex justify-center m-24">
           <div className="flex flex-1 justify-center md:w-1/3 bg-slate-100 rounded-xl p-5 m-5 shadow-lg">
@@ -502,6 +504,7 @@ export default function Page() {
           </div>
         </div>
       )}
+      </Suspense>
     </>
   );
 }
