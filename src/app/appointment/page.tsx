@@ -1,15 +1,10 @@
 "use client";
 import React, { useState } from "react";
-import { Button, Typography } from "@mui/material";
+import { Button } from "@mui/material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
-import TextField, {
-  FilledTextFieldProps,
-  OutlinedTextFieldProps,
-  StandardTextFieldProps,
-  TextFieldVariants,
-} from "@mui/material/TextField";
+import TextField from "@mui/material/TextField";
 import Image from "next/image";
 
 interface FormField<T> {
@@ -99,18 +94,6 @@ export default function Page() {
             <DatePicker
               value={dayjs(formData.date.value, "DD/MM/YYYY")}
               onChange={handleDateChange}
-              renderInput={(
-                params: React.JSX.IntrinsicAttributes & {
-                  variant?: TextFieldVariants | undefined;
-                } & Omit<
-                    | FilledTextFieldProps
-                    | OutlinedTextFieldProps
-                    | StandardTextFieldProps,
-                    "variant"
-                  >
-              ) => (
-                <TextField {...params} label="Select Date" className="mb-4" />
-              )}
             />
           </LocalizationProvider>
           <TextField
