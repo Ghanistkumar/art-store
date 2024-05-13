@@ -1,4 +1,5 @@
 import { Typography, Button, Input } from "@mui/material";
+import Link from "next/link";
 
 const LINKS = [
   {
@@ -7,7 +8,7 @@ const LINKS = [
   },
   {
     title: "Pages",
-    items: ["Login", "Register", "Add List", "Contact"],
+    items: ["Login", "Register", "Book Appointment", "Contact"],
   },
   {
     title: "Legal",
@@ -30,9 +31,16 @@ export function Footer() {
                 </Typography>
                 {items.map((link) => (
                   <li key={link}>
+                    {link === 'Book Appointment' ? (
+                      <Typography className="py-1 font-normal !text-gray-700 transition-colors hover:!text-gray-900">
+                      <Link href='/appointment' >{link} </Link>
+                    </Typography>
+                    ) : (
+
                     <Typography className="py-1 font-normal !text-gray-700 transition-colors hover:!text-gray-900">
                       {link}
                     </Typography>
+                    )}
                   </li>
                 ))}
               </ul>
