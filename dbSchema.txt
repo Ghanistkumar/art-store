@@ -48,3 +48,5 @@ CREATE TABLE order_details (
 
 10 138 115
 https://www.youtube.com/watch?v=5miHyP6lExg
+
+https://dev.to/shahmir049/how-to-send-emails-using-nextjs-14-resend-and-react-email-2b7g

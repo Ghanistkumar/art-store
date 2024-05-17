@@ -1,3 +1,4 @@
+"use server"
 import { Resend } from 'resend';
 import * as React from 'react';
 import EmailTemplate from '@/components/email-template';
@@ -8,7 +9,7 @@ export async function POST() {
   try {
     const { data, error } = await resend.emails.send({
       from: 'Acme <onboarding@resend.dev>',
-      to: ['patekghanist@gmail.com'],
+      to: 'patelghanist@gmail.com',
       subject: "Hello world",
       react: EmailTemplate({ firstName: "John" }) as React.ReactElement,
     });

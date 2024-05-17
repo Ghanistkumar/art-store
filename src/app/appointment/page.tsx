@@ -1,12 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import TextField from "@mui/material/TextField";
 import Image from "next/image";
-
 interface FormField<T> {
   value: T;
 }
@@ -46,6 +45,8 @@ export default function Page() {
     });
   };
 
+  const handleSubmit = () => {};
+
   return (
     <div className="bg-[#F1F9F9] min-h-screen">
       <span className="flex justify-center pt-5 text-4xl font-bold text-[#FFA5A5] drop-shadow-md">
@@ -70,6 +71,7 @@ export default function Page() {
             label="Name"
             type="text"
             variant="outlined"
+            name="name"
             value={formData.name.value}
             onChange={(e) => handleInputChange("name", e.target.value)}
             className="mb-4"
@@ -77,6 +79,7 @@ export default function Page() {
           <TextField
             label="Email Address"
             type="email"
+            name="email"
             variant="outlined"
             value={formData.email.value}
             onChange={(e) => handleInputChange("email", e.target.value)}
@@ -86,6 +89,7 @@ export default function Page() {
             label="Phone Number"
             type="tel"
             variant="outlined"
+            name="phone"
             value={formData.phone.value}
             onChange={(e) => handleInputChange("phone", e.target.value)}
             className="mb-4"
@@ -94,12 +98,14 @@ export default function Page() {
             <DatePicker
               value={dayjs(formData.date.value, "DD/MM/YYYY")}
               onChange={handleDateChange}
+              name="date"
             />
           </LocalizationProvider>
           <TextField
             label="Description"
             type="text"
             multiline
+            name="description"
             maxRows={4}
             variant="outlined"
             value={formData.description.value}
@@ -107,11 +113,19 @@ export default function Page() {
             className="mb-4"
           />
           <Button
+            type="submit"
             variant="contained"
             style={{
               backgroundColor: "#D2DAFF",
             }}
-            onClick={() => console.log("Form Data", formData)}
+            disabled={
+              formData.name.value === "" ||
+              formData.email.value === "" ||
+              formData.date.value === "" ||
+              formData.description.value === "" ||
+              formData.phone.value === ""
+            }
+            onClick={handleSubmit}
           >
             Book
           </Button>
