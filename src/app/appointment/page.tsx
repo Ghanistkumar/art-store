@@ -6,6 +6,9 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import TextField from "@mui/material/TextField";
 import Image from "next/image";
+import { sendMail, compileAppointmentTemplate } from "../lib/mail";
+import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 interface FormField<T> {
   value: T;
 }
@@ -29,10 +32,11 @@ const DEFAULT_FORM_STATE: FormData = {
 export default function Page() {
   const [formData, setFormData] = useState<FormData>(DEFAULT_FORM_STATE);
 
+  const router = useRouter();
   const handleInputChange = (field: keyof FormData, value: string) => {
     setFormData({
       ...formData,
-      [field]: { value: value.trim() },
+      [field]: { value: value },
     });
   };
 
@@ -45,7 +49,33 @@ export default function Page() {
     });
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = async () => {
+    const res = await sendMail({
+      to: "patelfenvi@gmail.com",
+      name: "Ghanist",
+      subject: `New Booking Appointment ${new Date()}`,
+      body: await compileAppointmentTemplate(
+        formData.name.value,
+        formData.date.value,
+        formData.phone.value,
+        formData.email.value,
+        formData.description.value
+      ),
+    });
+
+    if (res) {
+      Swal.fire({
+        title: "Thank You!",
+        text: "We will notify you soon!",
+        icon: "success",
+        confirmButtonText: "Ok",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          router.push("/");
+        }
+      });
+    }
+  };
 
   return (
     <div className="bg-[#F1F9F9] min-h-screen">
@@ -99,6 +129,7 @@ export default function Page() {
               value={dayjs(formData.date.value, "DD/MM/YYYY")}
               onChange={handleDateChange}
               name="date"
+              minDate={dayjs()}
             />
           </LocalizationProvider>
           <TextField

@@ -6,7 +6,6 @@ import AuthModal from "./auth-modal";
 import useUserStore from "@/app/utils/user-store";
 import useCart from "@/app/utils/cart-store";
 import Image from "next/image";
-import { POST } from "@/app/api/send/route";
 import {
   RectangleStackIcon,
   UserCircleIcon,
@@ -158,13 +157,6 @@ export function Navbar() {
                         style={{ color: "black" }}
                       >
                         Log in
-                      </Button>
-                      <Button
-                        onClick={POST}
-                        variant="text"
-                        style={{ color: "black" }}
-                      >
-                        Send Mail
                       </Button>
                     </>
                   )}
