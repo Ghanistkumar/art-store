@@ -138,11 +138,12 @@ export async function sendOrderDetails(
   orderId: string,
   product_id: string,
   quantity: number,
-  price: number
+  price: number,
+  paymentId: string
 ) {
   try {
-    await sql`INSERT INTO order_details (order_id, product_id, quantity, price_at_purchase)
-    VALUES (${orderId}, ${product_id}, ${quantity}, ${price});`;
+    await sql`INSERT INTO order_details (order_id, product_id, quantity, price_at_purchase, payment_id)
+    VALUES (${orderId}, ${product_id}, ${quantity}, ${price}, ${paymentId});`;
   } catch (err) {
     console.error("Failed to add Order details:", err);
   }
