@@ -31,15 +31,14 @@ export function Footer() {
                 </Typography>
                 {items.map((link) => (
                   <li key={link}>
-                    {link === 'Book Appointment' ? (
+                    {link === "Book Appointment" ? (
                       <Typography className="py-1 font-normal !text-gray-700 transition-colors hover:!text-gray-900">
-                      <Link href='/appointment' >{link} </Link>
-                    </Typography>
+                        <Link href="/appointment">{link} </Link>
+                      </Typography>
                     ) : (
-
-                    <Typography className="py-1 font-normal !text-gray-700 transition-colors hover:!text-gray-900">
-                      {link}
-                    </Typography>
+                      <Typography className="py-1 font-normal !text-gray-700 transition-colors hover:!text-gray-900">
+                        {link}
+                      </Typography>
                     )}
                   </li>
                 ))}
@@ -82,15 +81,7 @@ export function Footer() {
           </div>
         </div>
         <div className="md:text-center mt-16 font-normal !text-gray-700">
-          &copy; {CURRENT_YEAR} Made with{" "}
-          <a href="https://www.material-tailwind.com" target="_blank">
-            Material Tailwind
-          </a>{" "}
-          by{" "}
-          <a href="https://www.creative-tim.com" target="_blank">
-            Creative Tim
-          </a>
-          .
+          &copy; {CURRENT_YEAR} Made with extra love by and our Great Team!! .
         </div>
       </div>
     </footer>

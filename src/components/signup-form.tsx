@@ -1,5 +1,5 @@
 "use client";
-import { Button, TextField, Grid } from "@mui/material";
+import { Button, TextField, Grid, Link } from "@mui/material";
 import { useFormStatus } from "react-dom";
 import { createUser } from "@/app/lib/actions";
 import { startTransition, useState } from "react";
@@ -124,10 +124,9 @@ export function SignupForm({ toggleView, close }: Props) {
         <SignUpButton />
         <Grid container justifyContent="flex-end">
           <Grid item>
-            Already have an account?
-            <button type="button" onClick={toggleView}>
-              Login
-            </button>
+          <Link href="#" onClick={toggleView} variant="body2">
+              Already have an account? Sign In
+            </Link>
           </Grid>
         </Grid>
       </form>

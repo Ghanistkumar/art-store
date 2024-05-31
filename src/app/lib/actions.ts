@@ -24,7 +24,7 @@ export type UserState = {
 };
 
 const SignUpFormSchema = z.object({
-  username: z.string().min(1, "User Name is required"),
+  username: z.string().min(2, "User Name is required"),
   email: z.string().email("Invalid email format"),
   password: z
     .string()
