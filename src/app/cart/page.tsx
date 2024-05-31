@@ -25,14 +25,14 @@ export default function Page() {
   const [paymentId, setPaymentId] = useState<string>("");
 
   const DEFAULT_FORM_STATE = {
-    firstName: { value: "ghanist", error: false },
-    lastName: { value: "patel", error: false },
-    phoneNumber: { value: "8780330222", error: false },
-    email: { value: "ghanist@gmail.com", error: false },
-    addressLine1: { value: "vapi", error: false },
+    firstName: { value: "", error: false },
+    lastName: { value: "", error: false },
+    phoneNumber: { value: "", error: false },
+    email: { value: "", error: false },
+    addressLine1: { value: "", error: false },
     addressLine2: { value: "", error: false },
-    pincode: { value: "396191", error: false },
-    state: { value: "guj", error: false },
+    pincode: { value: "", error: false },
+    state: { value: "", error: false },
   };
 
   const [formData, setFormData] = useState<{
@@ -67,70 +67,70 @@ export default function Page() {
     }
   }, []);
   const onCheckout = async (e: any) => {
-    // if (formData.firstName.value === "") {
-    //   setFormData({
-    //     ...formData,
-    //     firstName: {
-    //       value: "",
-    //       error: true,
-    //     },
-    //   });
-    //   return;
-    // } else if (formData.lastName.value === "") {
-    //   setFormData({
-    //     ...formData,
-    //     lastName: {
-    //       value: "",
-    //       error: true,
-    //     },
-    //   });
-    //   return;
-    // } else if (formData.phoneNumber.value === "") {
-    //   setFormData({
-    //     ...formData,
-    //     phoneNumber: {
-    //       value: "",
-    //       error: true,
-    //     },
-    //   });
-    //   return;
-    // } else if (formData.email.value === "") {
-    //   setFormData({
-    //     ...formData,
-    //     email: {
-    //       value: "",
-    //       error: true,
-    //     },
-    //   });
-    //   return;
-    // } else if (formData.addressLine1.value === "") {
-    //   setFormData({
-    //     ...formData,
-    //     addressLine1: {
-    //       value: "",
-    //       error: true,
-    //     },
-    //   });
-    //   return;
-    // } else if (formData.pincode.value === "") {
-    //   setFormData({
-    //     ...formData,
-    //     pincode: {
-    //       value: "",
-    //       error: true,
-    //     },
-    //   });
-    //   return;
-    // } else if (formData.state.value === "") {
-    //   setFormData({
-    //     ...formData,
-    //     state: {
-    //       value: "",
-    //       error: true,
-    //     },
-    //   });
-    //   return;
-    // }
+    if (formData.firstName.value === "") {
+      setFormData({
+        ...formData,
+        firstName: {
+          value: "",
+          error: true,
+        },
+      });
+      return;
+    } else if (formData.lastName.value === "") {
+      setFormData({
+        ...formData,
+        lastName: {
+          value: "",
+          error: true,
+        },
+      });
+      return;
+    } else if (formData.phoneNumber.value === "") {
+      setFormData({
+        ...formData,
+        phoneNumber: {
+          value: "",
+          error: true,
+        },
+      });
+      return;
+    } else if (formData.email.value === "") {
+      setFormData({
+        ...formData,
+        email: {
+          value: "",
+          error: true,
+        },
+      });
+      return;
+    } else if (formData.addressLine1.value === "") {
+      setFormData({
+        ...formData,
+        addressLine1: {
+          value: "",
+          error: true,
+        },
+      });
+      return;
+    } else if (formData.pincode.value === "") {
+      setFormData({
+        ...formData,
+        pincode: {
+          value: "",
+          error: true,
+        },
+      });
+      return;
+    } else if (formData.state.value === "") {
+      setFormData({
+        ...formData,
+        state: {
+          value: "",
+          error: true,
+        },
+      });
+      return;
+    }
 
     const response = await fetch("http://localhost:4000/order", {
       method: "POST",
