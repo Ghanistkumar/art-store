@@ -132,7 +132,7 @@ export default function Page() {
       return;
     }
 
-    const response = await fetch("http://localhost:4000/order", {
+    const response = await fetch("https://art-store-ju16.onrender.com/order", {
       method: "POST",
       body: JSON.stringify({
         amount: totalPayment * 100,
@@ -158,7 +158,7 @@ export default function Page() {
         };
 
         const validateRes = await fetch(
-          "http://localhost:4000/order/validate",
+          "https://art-store-ju16.onrender.com/order/validate",
           {
             method: "POST",
             body: JSON.stringify(body),
