@@ -17,10 +17,10 @@ export default function Loading() {
         </defs>
         <circle
           transform="rotate(-113,100,100)"
-          stroke-linecap="round"
-          stroke-dashoffset="439.82"
-          stroke-dasharray="439.82 439.82"
-          stroke-width="2"
+          strokeLinecap="round"
+          strokeDashoffset="439.82"
+          strokeDasharray="439.82 439.82"
+          strokeWidth="2"
           stroke="currentColor"
           fill="none"
           r="70"
@@ -66,7 +66,7 @@ export default function Loading() {
                 fill="hsl(223,90%,70%)"
               ></rect>
               <rect
-                clip-path="url(#pencil-eraser)"
+                clipPath="url(#pencil-eraser)"
                 height="30"
                 width="5"
                 fill="hsl(223,90%,60%)"

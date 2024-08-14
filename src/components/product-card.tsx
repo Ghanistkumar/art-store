@@ -16,7 +16,7 @@ interface ProductCardProps {
 export function ProductCard({ product }: ProductCardProps) {
   const router = useRouter();
   return (
-    <div className="max-w-sm mx-auto rounded overflow-hidden shadow-lg bg-white">
+    <div className="max-w-sm mx-auto rounded-2xl overflow-hidden shadow-lg bg-white">
       <div className="relative h-48 md:h-64">
         <Image
           fill

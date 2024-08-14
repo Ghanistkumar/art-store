@@ -5,10 +5,13 @@ import { MouseEventHandler, Suspense } from "react";
 import CheckoutWizard from "@/components/checkout-wizard";
 import { useState } from "react";
 import { ViewProductSkeleton } from "../skeletons";
+import { useRouter } from "next/navigation";
+import { ArrowLeftCircleIcon } from "@heroicons/react/16/solid";
 
 export default function ViewProduct({ product }: any) {
   const [open, setOpen] = useState<boolean>(false);
   const cart = useCart();
+  const router = useRouter()
   const handleAddtoCart: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
     cart.addItem(product);
@@ -19,7 +22,8 @@ export default function ViewProduct({ product }: any) {
       <Suspense fallback={<ViewProductSkeleton />}>
         <div className="min-h-screen bg-gray-100 flex items-center justify-center">
           <div className="max-w-4xl w-full p-4 md:p-8 bg-white rounded-lg shadow-lg">
-            <div className="flex flex-col md:flex-row">
+              <button onClick={()=>router.push('/')}><ArrowLeftCircleIcon className="h-10 w-10" /></button>
+            <div className="flex flex-col md:flex-row ">
               <div className="w-full md:w-1/2">
                 <div className="relative h-96 md:h-full">
                   <Image
@@ -41,15 +45,15 @@ export default function ViewProduct({ product }: any) {
                     &#8377; {product.price}
                   </span>
                 </div>
-                <div className="flex items-center mb-4">
+                {/* <div className="flex items-center mb-4">
                   <span className="text-lg font-semibold mr-2">Quantity:</span>
                   <input
                     type="number"
-                    // onWheel={(event) => (event.target as HTMLInputElement).blur()}
+                    onWheel={(event) => (event.target as HTMLInputElement).blur()}
                     min="1"
                     className="w-16 px-2 py-1 border border-gray-300 rounded"
                   />
-                </div>
+                </div> */}
                 <button
                   className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded"
                   onClick={handleAddtoCart}

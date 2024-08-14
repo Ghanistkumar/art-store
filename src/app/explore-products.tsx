@@ -10,7 +10,7 @@ export async function ExploreProducts() {
 
   const PRODUCTS: QueryResultRow[] | any = await fetchProducts()
   return (
-    <section className="px-8">
+    <section className="px-8 py-8 bg-teal-50">
       <div className="container mx-auto mb-24 text-center">
         <Typography variant="h2" color="blue-gray">
           Explore Products
