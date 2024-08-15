@@ -2,6 +2,7 @@
 import nodemailer from "nodemailer";
 import * as handlebars from "handlebars";
 import { AppointmentTemplate } from "./templates/AppoitmentTemplate";
+import { OrderSummaryTemplate } from "./templates/OrderSummaryTemplate";
 
 export async function sendMail({
   to,
@@ -60,6 +61,44 @@ export async function compileAppointmentTemplate(
     email: email,
     phone: phone,
     description: description,
+  });
+  return htmlBody;
+}
+
+export async function compileOrderSummaryTemplate(
+  order_id: number,
+  total_quantity: number,
+  product_name?: string,
+  product_price?: number,
+  product_description?: string,
+  product_quantity?: number,
+  payment_type?: string,
+  subtotal?: number,
+  shipping_charge?: number,
+  total_amount?: number,
+  customer_address?: string,
+  delivery_date?: string,
+  tracking_url?: string,
+  company_email?: string,
+  company_number?: number
+) {
+  const template = handlebars.compile(OrderSummaryTemplate);
+  const htmlBody = template({
+    order_id: order_id,
+    total_quantity: total_quantity,
+    product_name: product_name,
+    product_price: product_price,
+    product_description: product_description,
+    product_quantity: product_quantity,
+    payment_type: payment_type,
+    subtotal: subtotal,
+    shipping_charge: shipping_charge,
+    total_amount: total_amount,
+    customer_address: customer_address,
+    delivery_date: delivery_date,
+    tracking_url: tracking_url,
+    company_email: company_email,
+    company_number: company_number,
   });
   return htmlBody;
 }
