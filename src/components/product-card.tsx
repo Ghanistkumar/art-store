@@ -20,7 +20,7 @@ export function ProductCard({ product }: ProductCardProps) {
       <div className="relative h-48 md:h-64">
         <Image
           fill
-          src='/image/lipan_art-1.png'
+          src={product.img}
           alt={product.product_name}
           className="h-full w-full object-cover scale-[1.1]"
         />
