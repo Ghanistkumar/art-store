@@ -47,6 +47,19 @@ CREATE TABLE order_details (
 );
 
 10 138 115
+
+INSERT INTO products (product_name, description, price, stock_quantity, category_id, created_date, modified_date, img, tag)
+VALUES (
+    'Personalised Name Art', 
+    'Lippan Art is essentially mud-relief work that incorporates mirrors. It is used to embellish the interior and exterior walls of the circular adobes that these communities live in.', 
+    1999, 
+    0, 
+    NULL, 
+    NOW(),
+    NOW(),
+    '/images/lipan_art-1.jpg', 
+    'Fully Customise able'
+);
 https://www.youtube.com/watch?v=5miHyP6lExg
 
 https://dev.to/shahmir049/how-to-send-emails-using-nextjs-14-resend-and-react-email-2b7g

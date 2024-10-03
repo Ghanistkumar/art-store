@@ -10,6 +10,8 @@ import Swal from "sweetalert2";
 import { Suspense } from "react";
 import { PaymentRes } from "../../../type";
 import { useRouter } from "next/navigation";
+import { sendMail } from "../lib/mail";
+import { compileOrderSummaryTemplate } from "../lib/mail";
 
 type obj<E> = {
   value: E;
@@ -199,17 +201,41 @@ export default function Page() {
               );
             }
           }
-          Swal.fire({
-            title: "Thank You!",
-            text: "Order Details Sent on Mail!!",
-            icon: "success",
-            confirmButtonText: "Ok",
-          }).then((result) => {
-            if (result.isConfirmed) {
-              cart.removeAll();
-              router.push("/");
-            }
+          const res = await sendMail({
+            to: formData.email.value,
+            name: "Ghanist",
+            subject: `Order Summary ${new Date()}`,
+            body: await compileOrderSummaryTemplate(order.id, //order_id
+              1, //total_quantity
+              cart.items[0].product_name, //product_name
+              cart.items[0].price, //product_price
+              cart.items[0].description, //product_description
+              cart.items.length,
+              'Visa',//payment_type
+              totalPayment,//subtotal
+              60,
+              60 + totalPayment,//total_amount
+              formData.addressLine1.value + formData.addressLine2.value, //customer_address
+              ' ',//delivery_date
+              ' ',//tracking_url
+              'rachnasutraa@gmail.com',//companyemail
+              9821082828//company_number
+            ),
           });
+
+          if(res){
+            Swal.fire({
+              title: "Thank You!",
+              text: "Order Details Sent on Mail!!",
+              icon: "success",
+              confirmButtonText: "Ok",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                cart.removeAll();
+                router.push("/");
+              }
+            });
+          }
         }
       },
       prefill: {
