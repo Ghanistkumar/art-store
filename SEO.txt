@@ -1,0 +1,74 @@
+<meta
+            name="description"
+            content="Join the Post Show After Party at PJ O’Briens Irish Pub, Toronto"
+        />
+        <!-- Schema.org for Google -->
+        <meta itemprop="name" content="Cian Ducrot - Post Show After Party!" />
+        <meta
+            itemprop="description"
+            content="Join the Post Show After Party at PJ O’Briens Irish Pub, Toronto"
+        />
+        <meta
+            itemprop="image"
+            content="https://ciright-email-images.s3.amazonaws.com/other-images/webp/logo-ciright-cyberone.webp"
+        />
+        <!-- Open Graph general (Facebook, Pinterest & Google+) -->
+        <meta name="og:title" content="Cian Ducrot - Post Show After Party!" />
+        <meta
+            name="og:description"
+            content="Join the Post Show After Party at PJ O’Briens Irish Pub, Toronto"
+        />
+        <meta
+            name="og:image"
+            content="https://ciright-email-images.s3.amazonaws.com/other-images/webp/logo-ciright-cyberone.webp"
+        />
+        <meta name="og:url" content="https://cian.ciright.live/" />
+        <meta name="og:site_name" content="Cian Ducrot - Post Show After Party!" />
+        <meta name="og:locale" content="en_US" />
+        <meta name="og:type" content="website" />
+        <meta
+            name="keywords"
+            content="Cian Ducrot - Post Show After Party!,Event"
+        />
+        <meta name="language" content="English" />
+        <meta name="revisit-after" content="1 days" />
+        <meta name="author" content="ciright" />
+        <meta charset="UTF-8" />
+        <meta name="title" content="Cian Ducrot - Post Show After Party!" />
+        <meta name="google-site-verification" content="F0XURfho0LecYwJrTRuTeB3t4C6I9awRpZp15XrNCIM" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="robots" content="index, follow" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap"
+            rel="stylesheet"
+        />
+        <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
+        id="bootstrap-css"> -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous"
+        />
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.css"
+            rel="stylesheet"
+        />
+        <link href="%PUBLIC_URL%/custom.css" rel="stylesheet" />
+        <link href="%PUBLIC_URL%/styles.css" rel="stylesheet" />
+        <link href="%PUBLIC_URL%/seminarStyles.css" rel="stylesheet" />
+        <script type="application/ld+json">
+            {
+                "@context": "http://www.schema.org",
+                "@type": "WebSite",
+                "name": "Cian Ducrot - Post Show After Party!",
+                "alternateName": "Cian Ducrot - Post Show After Party!",
+                "url": "https://cian.ciright.live/"
+            }
+        </script>
