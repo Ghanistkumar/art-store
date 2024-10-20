@@ -1,6 +1,7 @@
 import { sql } from "@vercel/postgres";
 import { unstable_noStore as noStore } from "next/cache";
 import { Category } from "../../../type";
+import clientPromise from "./mongo";
 interface Product {
   product_id: number;
   img: string;
@@ -8,6 +9,22 @@ interface Product {
   product_name: string;
   price: number;
   description: string;
+}
+
+export default async function fetchProductsFromMongo() {
+  noStore(); // Ensure response caching is disabled
+  
+  try {
+    const client = await clientPromise;
+    const db = client.db('art-store'); // Replace with your database name
+    const productsCollection = db.collection('products');
+
+    const productData = await productsCollection.find({}).toArray(); // Fetch all products
+    return productData; // Return data directly
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch product data");
+  }
 }
 export async function fetchProducts() {
   noStore();
