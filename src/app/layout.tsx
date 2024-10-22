@@ -5,6 +5,7 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../theme";
 import ToastProvider from "@/components/toaster";
+import { connectToMongoDB } from "./lib/mongo";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,6 +19,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // connectToMongoDB();
   return (
     <html lang="en">
       <head>

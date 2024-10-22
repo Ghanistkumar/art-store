@@ -1,7 +1,9 @@
 import { sql } from "@vercel/postgres";
 import { unstable_noStore as noStore } from "next/cache";
 import { Category } from "../../../type";
-import clientPromise from "./mongo";
+import { connectToMongoDB } from "./mongo";
+import { ProductModel } from "./product";
+import mongoose from 'mongoose';
 interface Product {
   product_id: number;
   img: string;
@@ -11,19 +13,22 @@ interface Product {
   description: string;
 }
 
-export default async function fetchProductsFromMongo() {
+export async function fetchProductsFromMongo() {
   noStore(); // Ensure response caching is disabled
   
-  try {
-    const client = await clientPromise;
-    const db = client.db('art-store'); // Replace with your database name
-    const productsCollection = db.collection('products');
+  // Establish the MongoDB connection if it's not already connected
+  const dbConnection = await connectToMongoDB();
 
-    const productData = await productsCollection.find({}).toArray(); // Fetch all products
-    return productData; // Return data directly
+  try {
+    // Query the "products" collection using the Product model
+    const products = await ProductModel.findOne({});
+    console.log(products)
+    let p = []
+    p.push(products)
+    return p; // Return the list of products
   } catch (error) {
-    console.error("Database Error:", error);
-    throw new Error("Failed to fetch product data");
+    console.error("Error fetching products:", error);
+    throw error;
   }
 }
 export async function fetchProducts() {

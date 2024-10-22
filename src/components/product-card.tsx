@@ -4,7 +4,7 @@ import { Button } from "@mui/material";
 import { useRouter } from "next/navigation";
 interface ProductCardProps {
   product: {
-    product_id: number;
+    product_uuid: number;
     img: string;
     tag: string;
     product_name: string;
@@ -36,7 +36,8 @@ export function ProductCard({ product }: ProductCardProps) {
         <div className="mt-4">
           <button
             className="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg border border-gray-900 text-gray-900 hover:opacity-75 focus:ring focus:ring-gray-300 active:opacity-[0.85]"
-            onClick={() => router.push(`/product/${product.product_id}/view`)}
+            // onClick={() => router.push(`/product/f83e783a-7990-4c0c-a0b0-3959000f4006/view`)}
+            onClick={() => router.push(`/product/${product.product_uuid}/view`)}
           >
             Just @ &#8377;{product.price}
           </button>

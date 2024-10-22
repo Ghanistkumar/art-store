@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material"
 import ProductCard from "@/components/product-card"
 import { Key } from "react";
-import fetchProductsFromMongo, { fetchProducts } from "./lib/data";
+import { fetchProducts, fetchProductsFromMongo } from "./lib/data";
 import { QueryResultRow } from "@vercel/postgres";
 
 // const {PRODUCTS} = require("../app/lib/placeholder-data.js")
@@ -25,7 +25,7 @@ export async function ExploreProducts() {
         </Typography>
       </div>
       <div className="container mx-auto grid grid-cols-1 gap-x-10 gap-y-24 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-14">
-        {PRODUCTS.map((product: any, idx: Key | null | undefined) => (
+        {PRODUCTS != null && PRODUCTS.map((product: any, idx: Key | null | undefined) => (
           <ProductCard key={idx} product={product} />
         ))}
       </div>

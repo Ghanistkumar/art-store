@@ -30,27 +30,27 @@ export default function Loading() {
           <g fill="none">
             <circle
               transform="rotate(-90)"
-              stroke-dashoffset="402"
-              stroke-dasharray="402.12 402.12"
-              stroke-width="30"
+              strokeDashoffset="402"
+              strokeDasharray="402.12 402.12"
+              strokeWidth="30"
               stroke="hsl(223,90%,50%)"
               r="64"
               className="pencil__body1"
             ></circle>
             <circle
               transform="rotate(-90)"
-              stroke-dashoffset="465"
-              stroke-dasharray="464.96 464.96"
-              stroke-width="10"
+              strokeDashoffset="465"
+              strokeDasharray="464.96 464.96"
+              strokeWidth="10"
               stroke="hsl(223,90%,60%)"
               r="74"
               className="pencil__body2"
             ></circle>
             <circle
               transform="rotate(-90)"
-              stroke-dashoffset="339"
-              stroke-dasharray="339.29 339.29"
-              stroke-width="10"
+              strokeDashoffset="339"
+              strokeDasharray="339.29 339.29"
+              strokeWidth="10"
               stroke="hsl(223,90%,40%)"
               r="54"
               className="pencil__body3"
