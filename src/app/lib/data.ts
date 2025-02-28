@@ -77,6 +77,7 @@ export async function fetchCategories() {
   noStore();
   try {
     const categoriesData = await sql`SELECT * FROM categories`;
+    console.log('data', categoriesData)
     return categoriesData.rows;
   } catch (error) {
     // console.error("Database Error:", error);

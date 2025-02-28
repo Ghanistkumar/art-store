@@ -17,12 +17,12 @@ export async function ExploreProducts() {
         <Typography variant="h2" color="blue-gray">
           Explore Products
         </Typography>
-        <Typography
+        {/* <Typography
           className="mt-2 mx-auto w-full px-4 !text-gray-500 lg:px-8"
         >
           Browse through 1,000+ web development courses and find the one that
           fits your needs.
-        </Typography>
+        </Typography> */}
       </div>
       <div className="container mx-auto grid grid-cols-1 gap-x-10 gap-y-24 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-14">
         {PRODUCTS != null && PRODUCTS.map((product: any, idx: Key | null | undefined) => (

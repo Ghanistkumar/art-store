@@ -9,6 +9,7 @@ import { Category } from "../../type";
 
 async function StoreCategories() {
   const CATEGORIES: QueryResultRow | any = await fetchCategories();
+  console.log(CATEGORIES)
   return (
     <section className="flex flex-col items-center justify-center mx-auto px-4 py-20 sm:px-6 lg:px-8 min-h-screen container mt-64">
       <div className="mb-12 text-center">
