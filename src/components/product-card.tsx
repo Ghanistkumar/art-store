@@ -15,6 +15,7 @@ interface ProductCardProps {
 
 export function ProductCard({ product }: ProductCardProps) {
   const router = useRouter();
+  console.log(product.img)
   return (
     <div className="max-w-sm mx-auto rounded-2xl overflow-hidden shadow-lg bg-white">
       <div className="relative h-48 md:h-64">
@@ -25,7 +26,7 @@ export function ProductCard({ product }: ProductCardProps) {
           className="h-full w-full object-cover scale-[1.1]"
         />
       </div>
-      <div className="p-4">
+      <div className="p-4 h-max-[164px] h-min-[164px] h-[164px]">
         <div className="font-bold text-lg md:text-xl mb-2">{product.product_name}</div>
         <p className="text-gray-700 text-base">{product.description}</p>
       </div>

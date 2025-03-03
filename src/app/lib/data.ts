@@ -21,11 +21,11 @@ export async function fetchProductsFromMongo() {
 
   try {
     // Query the "products" collection using the Product model
-    const products = await ProductModel.findOne({});
+    const products = await ProductModel.find({});
     console.log(products)
-    let p = []
-    p.push(products)
-    return p; // Return the list of products
+    // let p = []
+    // p.push(products)
+    return products; // Return the list of products
   } catch (error) {
     console.error("Error fetching products:", error);
     throw error;
